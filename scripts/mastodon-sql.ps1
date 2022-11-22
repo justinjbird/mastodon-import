@@ -92,7 +92,7 @@ if ((Test-Path -Path ../data/sql_matches.csv)) {
         Remove-Item ../data/sql_accounts.csv
     }
 
-    Import-Csv -Path ../data/sql_matches.csv | Sort-Object MastodonAccountAddress |
+    Import-Csv -Path ../data/sql_matches.csv | Sort-Object MastodonAccountAddress -Unique |
     Select-Object @{
         Label = "Account address"
         Expression= { $PSItem.MastodonAccountAddress }

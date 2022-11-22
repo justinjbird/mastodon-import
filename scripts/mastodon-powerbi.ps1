@@ -92,7 +92,8 @@ if ((Test-Path -Path ../data/pbi_matches.csv)) {
         Remove-Item ../data/pbi_accounts.csv
     }
 
-    Import-Csv -Path ../data/pbi_matches.csv | Sort-Object MastodonAccountAddress |
+    # unique import to remove many twitter profiles to one mastodon profile
+    Import-Csv -Path ../data/pbi_matches.csv | Sort-Object MastodonAccountAddress -Unique | 
         Select-Object @{
             Label      = "Account address"
             Expression = { $PSItem.MastodonAccountAddress }

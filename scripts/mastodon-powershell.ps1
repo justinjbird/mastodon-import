@@ -75,7 +75,7 @@ if ((Test-Path -Path ./data/matches.csv) -and $script:export) {
         Remove-Item ./data/sql_accounts.csv
     }
 
-    Import-Csv -Path ./data/matches.csv | Sort-Object MastodonAccountAddress |
+    Import-Csv -Path ./data/matches.csv | Sort-Object MastodonAccountAddress -Unique |
         Select-Object @{
             Label      = "Account address"
             Expression = { $PSItem.MastodonAccountAddress }
