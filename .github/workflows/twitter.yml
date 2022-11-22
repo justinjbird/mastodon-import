@@ -1,0 +1,28 @@
+name: twitter
+on:
+  workflow_dispatch:
+    push:
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  blockcheck:
+    runs-on: ubuntu-latest
+    env:
+      BLUEBIRDPS_API_KEY: ${{secrets.TWITTERAPIKEY}}
+      BLUEBIRDPS_API_SECRET: ${{secrets.TWITTERAPIKEYSECRET}}
+      BLUEBIRDPS_ACCESS_TOKEN: ${{secrets.TWITTERACCESSTOKEN}}
+      BLUEBIRDPS_ACCESS_TOKEN_SECRET: ${{secrets.TWITTERACCESSTOKENSECRET}}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: 💲 Create variables for module cacher
+        id: psmodulecache
+        uses: potatoqualitee/psmodulecache@v5.1
+        with:
+          modules-to-cache: BlueBirdPS
+
+      - name: 🚀 Run Twitter check
+        run: |
+          ./mastodon.ps1
